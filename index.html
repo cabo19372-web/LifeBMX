@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#10120f">
+<title>LifeBmx | BMX Race</title>
+<style>
+:root{--bg:#10120f;--panel:#1b1e19;--green:#b6ff36;--muted:#9a9f93;--white:#f6f7f2;--line:#30352b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--white);font-family:Arial,Helvetica,sans-serif;padding-bottom:85px}
+button,input{font:inherit}
+button{cursor:pointer}
+header{padding:23px 19px 15px;background:linear-gradient(140deg,#242a1d,#10120f 75%)}
+.top{display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:25px;font-weight:900;letter-spacing:-1px}.logo span{color:var(--green)}
+.pill{border:1px solid #465334;border-radius:20px;padding:7px 10px;color:var(--green);font-size:11px;font-weight:bold}
+.sub{font-size:12px;color:var(--muted);margin-top:5px}
+main{padding:0 16px}
+section{display:none;padding-top:17px}
+section.active{display:block;animation:fade .2s ease}
+@keyframes fade{from{opacity:.5;transform:translateY(4px)}to{opacity:1;transform:none}}
+h1{font-size:27px;letter-spacing:-.7px;margin:8px 0}
+h2{font-size:18px;margin:0 0 12px}
+p{line-height:1.5}
+.muted{color:var(--muted);font-size:13px}
+.hero{background:linear-gradient(135deg,#34451f,#1a2114 65%,#20251b);border:1px solid #455331;border-radius:20px;padding:20px;margin-bottom:17px;overflow:hidden;position:relative}
+.hero:after{content:"🚴";position:absolute;right:8px;bottom:8px;font-size:65px;opacity:.18}
+.eyebrow{color:var(--green);font-size:11px;font-weight:800;letter-spacing:1.7px}
+.hero h1{font-size:29px;max-width:250px;line-height:1.08}
+.hero p{font-size:13px;color:#d0d7c6;max-width:250px}
+.btn{border:0;border-radius:12px;padding:12px 15px;background:var(--green);color:#14170e;font-weight:800}
+.btn.secondary{background:#292e24;color:var(--white);border:1px solid var(--line)}
+.btn.small{padding:9px 12px;font-size:12px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 20px}
+.stat,.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:15px}
+.stat strong{display:block;font-size:25px;margin:9px 0 4px}
+.stat span,.small-label{font-size:11px;color:var(--muted)}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin:22px 0 11px}
+.link{color:var(--green);font-size:12px;background:none;border:0}
+.card{margin-bottom:10px}
+.card-title{display:flex;align-items:center;gap:12px}
+.emoji{width:42px;height:42px;border-radius:12px;background:#2b3421;display:grid;place-items:center;font-size:22px;flex-shrink:0}
+.card h3{font-size:15px;margin:0 0 5px}
+.card p{margin:0;color:var(--muted);font-size:12px}
+.card .btn{margin-top:13px}
+.progress{height:7px;background:#353a30;border-radius:10px;overflow:hidden;margin:12px 0 5px}
+.progress div{height:100%;width:0;background:var(--green);border-radius:10px;transition:width .3s}
+.tag{display:inline-block;border-radius:8px;background:#2c3325;color:var(--green);padding:5px 8px;font-size:10px;margin-top:8px}
+nav{position:fixed;z-index:5;bottom:0;left:0;right:0;background:#171915;border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:9px 2px calc(9px + env(safe-area-inset-bottom))}
+nav button{background:none;border:0;color:#a4a99d;font-size:10px;display:flex;flex-direction:column;align-items:center;gap:5px;min-width:54px}
+nav button b{font-size:20px;font-weight:normal}
+nav button.active{color:var(--green)}
+.check{display:flex;align-items:flex-start;gap:10px;margin:13px 0;font-size:13px;line-height:1.4}
+.check input{accent-color:var(--green);width:18px;height:18px;margin:0;flex-shrink:0}
+input[type=text]{width:100%;background:#11130f;border:1px solid #414638;color:white;padding:13px;border-radius:10px;margin:7px 0 14px}
+.badge{color:var(--green);font-size:11px;font-weight:bold}
+footer{text-align:center;color:#666d60;font-size:10px;padding:25px 10px}
+</style>
+</head>
+<body>
+<header>
+  <div class="top">
+    <div class="logo">LIFE<span>BMX</span></div>
+    <div class="pill">● BMX RACE</div>
+  </div>
+  <div class="sub">BALNEÁRIO CAMBORIÚ · SC</div>
+</header>
+
+<main>
+<section id="home" class="active">
+  <div class="hero">
+    <div class="eyebrow">SUA PRÓXIMA EVOLUÇÃO COMEÇA AQUI</div>
+    <h1>Viva a pista.<br>Busque sua evolução.</h1>
+    <p>Treine com propósito. Registre cada sessão. Evolua no BMX Race.</p>
+    <button class="btn" onclick="show('treinos')">Ver meus treinos →</button>
+  </div>
+  <div class="section-head"><h2>Seu painel</h2><span class="badge">NÍVEL INICIAL</span></div>
+  <div class="grid">
+    <div class="stat"><span>SESSÕES CONCLUÍDAS</span><strong id="sessions">0</strong><span>Treinos registrados</span></div>
+    <div class="stat"><span>FOCO DA SEMANA</span><strong id="weekly">0/3</strong><span>Meta de sessões</span></div>
+  </div>
+  <div class="section-head"><h2>Missão da semana</h2></div>
+  <div class="card">
+    <div class="card-title"><div class="emoji">🎯</div><div><h3>Construir consistência</h3><p>Escolha até 3 dias para treinar nesta semana.</p></div></div>
+    <div class="progress"><div id="weekbar"></div></div>
+    <div class="muted" id="weektext">0 de 3 sessões concluídas</div>
+  </div>
+  <div class="section-head"><h2>Treino recomendado</h2><button class="link" onclick="show('treinos')">Ver todos</button></div>
+  <div class="card">
+    <div class="card-title"><div class="emoji">🚦</div><div><h3>Técnica de largada</h3><p>Preparação, equilíbrio e reação</p></div></div>
+    <span class="tag">TÉCNICA · INICIANTE</span><br>
+    <button class="btn small" onclick="openWorkout('largada')">Abrir treino</button>
+  </div>
+</section>
+
+<section id="treinos">
+  <div class="eyebrow">PLANO DE TREINO</div><h1>Treinos BMX Race</h1>
+  <p class="muted">Escolha uma sessão adequada à sua experiência. Comece com controle e progrida com orientação.</p>
+  <div class="card">
+    <div class="card-title"><div class="emoji">🚦</div><div><h3>Largada e posição</h3><p>Equilíbrio, postura e preparação para o gate.</p></div></div>
+    <span class="tag">TÉCNICA</span><br><button class="btn small" onclick="openWorkout('largada')">Iniciar sessão</button>
+  </div>
+  <div class="card">
+    <div class="card-title"><div class="emoji">⚡</div><div><h3>Sprint e aceleração</h3><p>Arrancadas curtas e recuperação entre repetições.</p></div></div>
+    <span class="tag">EXPLOSÃO</span><br><button class="btn small" onclick="openWorkout('sprint')">Iniciar sessão</button>
+  </div>
+  <div class="card">
+    <div class="card-title"><div class="emoji">↪️</div><div><h3>Leitura de curvas</h3><p>Olhar, trajetória e controle da bicicleta.</p></div></div>
+    <span class="tag">CONTROLE</span><br><button class="btn small" onclick="openWorkout('curvas')">Iniciar sessão</button>
+  </div>
+  <div class="card">
+    <div class="card-title"><div class="emoji">〰️</div><div><h3>Pump e leitura de pista</h3><p>Observar o terreno e trabalhar o movimento adequado.</p></div></div>
+    <span class="tag">TÉCNICA DE PISTA</span><br><button class="btn small" onclick="openWorkout('pump')">Iniciar sessão</button>
+  </div>
+  <div class="card">
+    <div class="card-title"><div class="emoji">💪</div><div><h3>Preparação física em casa</h3><p>Movimentos controlados, mobilidade e equilíbrio.</p></div></div>
+    <span class="tag">SEM EQUIPAMENTO</span><br><button class="btn small" onclick="openWorkout('fisico')">Iniciar sessão</button>
+  </div>
+  <div class="card">
+    <div class="card-title"><div class="emoji">🧠</div><div><h3>Preparação mental</h3><p>Objetivo da sessão, foco e revisão após o treino.</p></div></div>
+    <span class="tag">MENTAL</span><br><button class="btn small" onclick="openWorkout('mental')">Iniciar sessão</button>
+  </div>
+</section>
+
+<section id="sessao">
+  <button class="link" onclick="show('treinos')">← Voltar aos treinos</button>
+  <div class="eyebrow" id="worktype">SESSÃO</div><h1 id="worktitle">Treino</h1>
+  <p class="muted" id="workdesc"></p>
+  <div class="card"><h3>Checklist da sessão</h3><p>Marque as etapas conforme forem concluídas.</p><div id="tasks"></div>
+  <div class="progress"><div id="taskbar"></div></div><div id="tasktext" class="muted">0 etapas concluídas</div></div>
+  <div class="card"><h3>Registro do piloto</h3><p>Como foi a sessão de hoje?</p>
+    <label class="check"><input type="radio" name="feeling" value="Boa"> Boa — consegui manter o foco</label>
+    <label class="check"><input type="radio" name="feeling" value="Normal"> Normal — preciso praticar mais</label>
+    <label class="check"><input type="radio" name="feeling" value="Difícil"> Difícil — preciso adaptar</label>
+    <button class="btn" onclick="finishWorkout()">Concluir e registrar</button>
+    <p id="saveMsg" class="muted"></p>
+  </div>
+</section>
+
+<section id="progresso">
+  <div class="eyebrow">EVOLUÇÃO DO PILOTO</div><h1>Meu progresso</h1>
+  <div class="grid">
+    <div class="stat"><span>TREINOS REGISTRADOS</span><strong id="pSessions">0</strong></div>
+    <div class="stat"><span>ETAPAS MARCADAS</span><strong id="pTasks">0</strong></div>
+  </div>
+  <div class="card"><h3>Meta semanal</h3><p>Objetivo: concluir 3 sessões por semana.</p><div class="progress"><div id="pbar"></div></div><p id="pmeta" class="muted">0 de 3 sessões</p></div>
+  <div class="section-head"><h2>Histórico</h2></div><div id="history"><p class="muted">Seus treinos concluídos aparecerão aqui.</p></div>
+  <button class="btn secondary" onclick="resetData()">Reiniciar meus dados</button>
+</section>
+
+<section id="clube">
+  <div class="eyebrow">COMUNIDADE LIFE BMX</div><h1>Clube do piloto</h1>
+  <div class="hero"><div class="eyebrow">JUNTOS NA PISTA</div><h1>Uma equipe.<br>Uma evolução.</h1><p>Use este espaço para organizar objetivos e ideias para o BMX Race local.</p></div>
+  <div class="card"><div class="card-title"><div class="emoji">🏁</div><div><h3>Desafio pessoal</h3><p>Registre um objetivo para sua próxima sessão.</p></div></div>
+    <input id="goalInput" type="text" placeholder="Ex.: manter equilíbrio na largada">
+    <button class="btn" onclick="saveGoal()">Salvar objetivo</button><p id="goalSaved" class="muted"></p>
+  </div>
+  <div class="card"><h3>Ideias para o clube</h3><p>• Encontros de treino supervisionados</p><p>• Compartilhamento de metas</p><p>• Revisão de sessões e evolução</p><p class="muted">Recursos sociais reais, como chat e grupos online, precisam de um serviço conectado e serão implementados depois.</p></div>
+</section>
+
+<section id="perfil">
+  <div class="eyebrow">IDENTIDADE DO PILOTO</div><h1>Meu perfil</h1>
+  <div class="card">
+    <div class="emoji" style="width:60px;height:60px;font-size:30px">🚴</div>
+    <label for="pilotName" class="muted">Nome do piloto</label><input id="pilotName" type="text" placeholder="Digite seu nome">
+    <label for="pilotCity" class="muted">Cidade</label><input id="pilotCity" type="text" value="Balneário Camboriú - SC">
+    <label for="pilotLevel" class="muted">Nível atual</label>
+    <input id="pilotLevel" type="text" value="Iniciante" readonly>
+    <button class="btn" onclick="saveProfile()">Salvar perfil</button><p id="profileMsg" class="muted"></p>
+  </div>
+  <div class="card"><h3>Sobre o LifeBmx</h3><p>Um projeto dedicado ao BMX Race, com foco em técnica, preparação física, metas e evolução do piloto.</p><p class="muted">Versão protótipo 0.1 · Os dados ficam salvos neste navegador.</p></div>
+</section>
+<footer>LIFEBMX · BMX RACE · BALNEÁRIO CAMBORIÚ, SC</footer>
+</main>
+
+<nav>
+  <button class="active" data-page="home" onclick="show('home')"><b>⌂</b>Início</button>
+  <button data-page="treinos" onclick="show('treinos')"><b>⚡</b>Treinos</button>
+  <button data-page="progresso" onclick="show('progresso')"><b>▥</b>Progresso</button>
+  <button data-page="clube" onclick="show('clube')"><b>♧</b>Clube</button>
+  <button data-page="perfil" onclick="show('perfil')"><b>◎</b>Perfil</button>
+</nav>
+
+<script>
+const plans={
+largada:{title:"Largada e posição",type:"TÉCNICA BMX RACE",desc:"Sessão inicial de controle e preparação. Treinos de gate devem ser feitos em pista apropriada, com capacete e orientação.",tasks:["Definir um objetivo técnico para a sessão","Fazer aquecimento leve e mobilidade","Revisar postura e equilíbrio com a bicicleta parada","Com orientação, praticar a preparação para a largada","Anotar um ponto para melhorar na próxima sessão"]},
+sprint:{title:"Sprint e aceleração",type:"EXPLOSÃO",desc:"Priorize técnica, controle e recuperação. Faça acelerações na pista somente em local seguro e com supervisão.",tasks:["Fazer aquecimento antes dos esforços","Revisar posição de pedalar e controle da bicicleta","Realizar acelerações curtas apenas em local seguro","Recuperar entre os esforços","Registrar como se sentiu"]},
+curvas:{title:"Leitura de curvas",type:"CONTROLE DA BICICLETA",desc:"Observe a trajetória e o estado da pista. Não tente ganhar velocidade sacrificando o controle.",tasks:["Observar a entrada e a saída da curva","Identificar a trajetória mais segura com o treinador","Praticar controle em velocidade confortável","Manter atenção ao espaço e aos outros pilotos","Anotar o que aprendeu"]},
+pump:{title:"Pump e leitura de pista",type:"TÉCNICA DE PISTA",desc:"Comece observando o terreno e aprendendo a movimentação correta com um treinador. Não experimente saltos ou obstáculos avançados sozinho.",tasks:["Observar o terreno antes de pedalar","Identificar os pontos de compressão e transição com orientação","Revisar posição corporal e controle","Praticar somente os movimentos adequados ao seu nível","Registrar dúvidas para o treinador"]},
+fisico:{title:"Preparação física",type:"TREINO EM CASA",desc:"Faça os movimentos em espaço livre, sem dor e sem competir com a fadiga. Pare se sentir dor, tontura ou mal-estar.",tasks:["Aquecer com marcha no lugar por 2 minutos","Fazer 2 séries leves de sentar e levantar de uma cadeira","Fazer elevações de panturrilha com apoio, conforme tolerância","Praticar equilíbrio parado perto de um apoio firme","Finalizar com mobilidade leve e respiração tranquila"]},
+mental:{title:"Preparação mental",type:"FOCO DO PILOTO",desc:"Uma sessão simples para criar objetivos realistas e aprender com cada treino.",tasks:["Escolher um objetivo pequeno e claro","Imaginar a execução técnica com calma","Fazer algumas respirações lentas e confortáveis","Definir um ponto para observar durante o treino","Anotar o que funcionou e o que quer praticar"]}
+};
+let data={sessions:[],completed:0,profile:{name:"",city:"Balneário Camboriú - SC"},goal:""};
+try{data={...data,...JSON.parse(localStorage.getItem("lifebmx")||"{}")}}catch(e){}
+let current="",checks=[];
+function persist(){try{localStorage.setItem("lifebmx",JSON.stringify(data))}catch(e){}}
+function show(id){
+ document.querySelectorAll("main section").forEach(s=>s.classList.toggle("active",s.id===id));
+ document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===id));
+ if(id==="progresso"||id==="home")updateStats();
+ window.scrollTo(0,0);
+}
+function openWorkout(id){
+ current=id;checks=plans[id].tasks.map(()=>false);
+ document.getElementById("worktitle").textContent=plans[id].title;
+ document.getElementById("worktype").textContent=plans[id].type;
+ document.getElementById("workdesc").textContent=plans[id].desc;
+ document.getElementById("saveMsg").textContent="";
+ document.querySelectorAll('input[name="feeling"]').forEach(r=>r.checked=false);
+ renderTasks();show("sessao");
+}
+function renderTasks(){
+ document.getElementById("tasks").innerHTML=plans[current].tasks.map((t,i)=>`<label class="check"><input type="checkbox" ${checks[i]?"checked":""} onchange="toggleTask(${i},this.checked)"><span>${t}</span></label>`).join("");
+ let n=checks.filter(Boolean).length;
+ document.getElementById("taskbar").style.width=(n/checks.length*100)+"%";
+ document.getElementById("tasktext").textContent=`${n} de ${checks.length} etapas concluídas`;
+}
+function toggleTask(i,v){checks[i]=v;renderTasks()}
+function finishWorkout(){
+ if(checks.every(v=>!v)){document.getElementById("saveMsg").textContent="Marque pelo menos uma etapa antes de registrar.";return}
+ const feeling=document.querySelector('input[name="feeling"]:checked');
+ data.sessions.unshift({name:plans[current].title,date:new Date().toLocaleDateString("pt-BR"),tasks:checks.filter(Boolean).length,total:checks.length,feeling:feeling?feeling.value:"Não informado"});
+ data.completed=(data.completed||0)+checks.filter(Boolean).length;
+ persist();document.getElementById("saveMsg").textContent="Sessão registrada! Boa evolução, piloto.";
+ updateStats();
+}
+function updateStats(){
+ const n=(data.sessions||[]).length,w=Math.min(n,3),tasks=data.completed||0;
+ ["sessions","pSessions"].forEach(id=>{let e=document.getElementById(id);if(e)e.textContent=n});
+ let weekly=document.getElementById("weekly");if(weekly)weekly.textContent=w+"/3";
+ ["weekbar","pbar"].forEach(id=>{let e=document.getElementById(id);if(e)e.style.width=(w/3*100)+"%"});
+ let wt=document.getElementById("weektext");if(wt)wt.textContent=w+" de 3 sessões registradas";
+ let pt=document.getElementById("pTasks");if(pt)pt.textContent=tasks;
+ let pm=document.getElementById("pmeta");if(pm)pm.textContent=w+" de 3 sessões registradas";
+ let hist=document.getElementById("history");
+ if(hist)hist.innerHTML=n?data.sessions.map(s=>`<div class="card"><h3>${escapeHtml(s.name)}</h3><p>${escapeHtml(s.date)} · ${s.tasks}/${s.total} etapas</p><span class="tag">${escapeHtml(s.feeling)}</span></div>`).join(""):'<p class="muted">Seus treinos concluídos aparecerão aqui.</p>';
+}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function saveProfile(){
+ data.profile={name:document.getElementById("pilotName").value.trim(),city:document.getElementById("pilotCity").value.trim()};
+ persist();document.getElementById("profileMsg").textContent="Perfil salvo neste aparelho!";
+}
+function saveGoal(){
+ data.goal=document.getElementById("goalInput").value.trim();persist();
+ document.getElementById("goalSaved").textContent=data.goal?"Objetivo salvo: "+data.goal:"Digite um objetivo primeiro.";
+}
+function resetData(){
+ if(confirm("Quer apagar o histórico e reiniciar seus dados de treino?")){
+ data.sessions=[];data.completed=0;persist();updateStats();
+ }
+}
+document.getElementById("pilotName").value=data.profile?.name||"";
+document.getElementById("pilotCity").value=data.profile?.city||"Balneário Camboriú - SC";
+document.getElementById("goalInput").value=data.goal||"";
+if(data.goal)document.getElementById("goalSaved").textContent="Objetivo salvo: "+data.goal;
+updateStats();
+</script>
+</body>
+</html>
